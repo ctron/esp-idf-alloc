@@ -1,0 +1,10 @@
+[package]
+authors = ["Jens Reimann <ctron@dentrassi.de>"]
+categories = ["embedded", "alloc" ,"no-std"]
+description = "Allocator for ESP-IDF"
+keywords = ["alloc", "esp32", "esp"]
+license = "EPL-2.0"
+name = "esp-idf-alloc"
+repository = "https://github.com/ctron/esp-idf-alloc"
+version = "0.0.1"
+edition = "2018"
