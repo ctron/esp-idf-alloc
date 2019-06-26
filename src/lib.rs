@@ -22,6 +22,8 @@ extern "C" {
     fn heap_caps_malloc(size:usize, caps:u32) -> *mut core::ffi::c_void;
     fn heap_caps_free(ptr:*mut core::ffi::c_void);
     fn heap_caps_realloc(ptr:*mut core::ffi::c_void, size:usize, caps:u32) -> *mut core::ffi::c_void;
+    
+    fn abort() -> !;
 } 
 
 unsafe impl GlobalAlloc for EspIdfAllocator {
@@ -41,5 +43,7 @@ unsafe impl GlobalAlloc for EspIdfAllocator {
 
 #[alloc_error_handler]
 fn alloc_error(_layout: Layout) -> ! {
-    loop {}
+    unsafe {
+        abort();
+    }
 }
