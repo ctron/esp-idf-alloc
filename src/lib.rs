@@ -9,7 +9,6 @@
  *******************************************************************************/
 
 #![no_std]
-
 #![feature(alloc_error_handler)]
 
 use core::alloc::{GlobalAlloc, Layout};
@@ -19,19 +18,22 @@ pub struct EspIdfAllocator;
 const MALLOC_CAP_8BIT: u32 = 4;
 
 extern "C" {
-    fn heap_caps_malloc(size:usize, caps:u32) -> *mut core::ffi::c_void;
-    fn heap_caps_free(ptr:*mut core::ffi::c_void);
-    fn heap_caps_realloc(ptr:*mut core::ffi::c_void, size:usize, caps:u32) -> *mut core::ffi::c_void;
-    
+    fn heap_caps_malloc(size: usize, caps: u32) -> *mut core::ffi::c_void;
+    fn heap_caps_free(ptr: *mut core::ffi::c_void);
+    fn heap_caps_realloc(
+        ptr: *mut core::ffi::c_void,
+        size: usize,
+        caps: u32,
+    ) -> *mut core::ffi::c_void;
+
     fn abort() -> !;
-} 
+}
 
 unsafe impl GlobalAlloc for EspIdfAllocator {
-
     unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
         heap_caps_malloc(layout.size(), MALLOC_CAP_8BIT) as *mut u8
-   }
-     
+    }
+
     unsafe fn dealloc(&self, ptr: *mut u8, _layout: Layout) {
         heap_caps_free(ptr as *mut core::ffi::c_void)
     }
