@@ -9,7 +9,6 @@
  *******************************************************************************/
 
 #![no_std]
-#![feature(alloc_error_handler)]
 
 use core::alloc::{GlobalAlloc, Layout};
 
@@ -25,8 +24,6 @@ extern "C" {
         size: usize,
         caps: u32,
     ) -> *mut core::ffi::c_void;
-
-    fn abort() -> !;
 }
 
 unsafe impl GlobalAlloc for EspIdfAllocator {
@@ -40,12 +37,5 @@ unsafe impl GlobalAlloc for EspIdfAllocator {
 
     unsafe fn realloc(&self, ptr: *mut u8, _layout: Layout, new_size: usize) -> *mut u8 {
         heap_caps_realloc(ptr as *mut core::ffi::c_void, new_size, MALLOC_CAP_8BIT) as *mut u8
-    }
-}
-
-#[alloc_error_handler]
-fn alloc_error(_layout: Layout) -> ! {
-    unsafe {
-        abort();
     }
 }

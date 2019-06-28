@@ -21,6 +21,29 @@ extern crate esp_idf_alloc;
 static A: esp_idf_alloc::EspIdfAllocator = esp_idf_alloc::EspIdfAllocator;
 ~~~
 
+### Error handler
+
+If you use a custom global allocator in your application, you will also need an error handler.
+
+The following code will use the ESP-IDF `abort()` method to handle the error:
+
+~~~rust
+#![feature(alloc_error_handler)]
+
+use core::alloc::Layout;
+
+extern "C" {
+    fn abort() -> !;
+}
+
+#[alloc_error_handler]
+fn alloc_error(_layout: Layout) -> ! {
+    unsafe {
+        abort();
+    }
+}
+~~~
+
 ## Using with `alloc`
 
 Also be sure to link in the `alloc` create, as you might want this. Add the following to your `Xargo.toml`:
