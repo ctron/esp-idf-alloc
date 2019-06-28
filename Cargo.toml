@@ -6,5 +6,5 @@ keywords = ["alloc", "esp32", "esp"]
 license = "EPL-2.0"
 name = "esp-idf-alloc"
 repository = "https://github.com/ctron/esp-idf-alloc"
-version = "0.0.1"
+version = "0.1.0"
 edition = "2018"
