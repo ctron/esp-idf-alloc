@@ -1,4 +1,4 @@
-# Rust allocator backed by ESP-IDF
+# Rust allocator, backed by ESP-IDF
 
 This is a memory allocator for Rust, backed by the [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/latest/).
 
