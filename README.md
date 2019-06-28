@@ -1,4 +1,4 @@
-# Rust allocator, backed by ESP-IDF
+# Rust allocator, backed by ESP-IDF [![Crates.io](https://img.shields.io/crates/v/esp-idf-alloc.svg)](https://crates.io/crates/esp-idf-alloc) 
 
 This is a memory allocator for Rust, backed by the [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/latest/).
 
